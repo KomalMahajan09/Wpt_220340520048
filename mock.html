@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<script src="jquery-3.5.1.min.js"></script>
+		<script>
+			$(()=>{
+				console.log("page load");
+				$("#add").blur(()=>{
+					console.log("blur event occured");
+
+					let input={bookid:$("#id").val(),bookname:$("#name").val(),price:$("#price").val()}
+
+
+				let	ajaxparam={
+							data: input,
+                    		type:"get",
+                   			 dataType:"json",
+                    		url: "http://localhost:800/show",
+							
+                    		success: (datafromserver)=> {
+								if(datafromserver===true)
+								{
+									
+									$("#show").text("show table ");
+								
+
+								}
+								
+							},
+
+                   			 error:  (datafromserver)=> {
+                        		console.log("server error");
+                    			}
+					
+					}
+					
+					$.ajax(ajaxparam);
+				});
+
+
+
+
+				$("#add").click(()=>{
+					console.log("click event occured");
+
+					let input={bookid:$("#id").val(),bookname:$("#name").val(),price:$("#price").val()}
+
+
+				let	ajaxparam={
+							data: input,
+                    		type:"get",
+                   			 dataType:"json",
+                    		url: "http://localhost:800/add",
+							
+                    		success: (datafromserver)=> {
+								if(datafromserver===true)
+								{
+									$("#msg").text("Book details added ");
+									console.log("inserted ");
+
+								}
+								else
+								{
+									$("#msg").text("Book details not  added ");
+									console.log("not inserted");
+
+								}
+							},
+
+                   			 error:  (datafromserver)=> {
+                        		console.log("server error");
+                    			}
+					
+					}
+					
+					$.ajax(ajaxparam);
+				});
+
+				
+
+});
+
+	</script>
+
+
+</head>
+<body>
+
+<div>
+	<label>Book ID</label>
+	
+	<input type="text" id="id" />
+	<span id="msg" >Message</span><br><br>
+	<label>Book Name</label>
+	<input type="text" id="name" /><br><br>
+	<label>Price</label>
+	<input type="text" id="price" /><br><br>
+	<input type="button" id="add" value="Add items"/>
+	<span id="show" >Show All books here</span><br><br>
+
+</div>
+
+</body>
+
+</html>
